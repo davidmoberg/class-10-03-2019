@@ -1,0 +1,31 @@
+---
+title: "10-03"
+author: "David Moberg"
+date: "10/3/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE)
+library(tidyverse)
+library(googlesheets4)
+library(readr)
+library(knitr)
+library(readxl)
+```
+
+
+```{r}
+attendance <- read_xlsx("raw-data/Partner Sheet.xlsx")%>%select("Student")%>%na.omit()
+
+cold_call<-function(x){
+  sample_n(x, 1)%>%print("name")
+}
+cold_call(attendance)
+```
+
+```{r}
+sheets_deauth()
+x <- read_sheet("1cgP-e6THVfiW5TJ95QhX3jkNxKvc8Sicp9k_BkSRd2I")%>%filter(!is.na(red))
+ggplot(x, aes(x=red, y=white))+geom_col()+labs(title = "Red vs White ball distributions in a 25 ball sample")
+```
